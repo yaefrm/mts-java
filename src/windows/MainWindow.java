@@ -1,29 +1,34 @@
 package windows;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class MainWindow extends JFrame {
 
-    private final JButton exampleButton = new JButton("Example Button");
+    private final int width = 300;
+    private final int height = 500;
 
+    private final JButton button = new JButton("Volkov Max");
 
-    public MainWindow() {
-        super("Новое окно");
+    public MainWindow()  {
+        super("Main");
+
         JPanel jPanel = new JPanel();
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(250, 600);
-        setResizable(false);
+        setSize(width, height);
         setLocationRelativeTo(null);
-        GridLayout layout = new GridLayout(6, 1, 5, 12);
-        jPanel.add(exampleButton);
-        jPanel.setLayout(layout);
+
+        GridLayout gridLayout = new GridLayout(4, 1, 0, 0);
+        jPanel.setLayout(gridLayout);
+
+        jPanel.add(button);
+
         getContentPane().add(jPanel);
 
-
-        exampleButton.addActionListener(e -> {
-            ExampleWindow exampleWindow = new ExampleWindow();
-            exampleWindow.setVisible(true);
+        button.addActionListener(e -> {
+            TriangleWindow triangleWindow = new TriangleWindow();
+            triangleWindow.setVisible(true);
         });
     }
 }
