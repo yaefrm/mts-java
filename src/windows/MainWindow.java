@@ -7,6 +7,7 @@ public class MainWindow extends JFrame {
 
     private final JButton exampleButton = new JButton("Example Button");
     private final JButton circleButton = new JButton("Efremova Yana");
+    private final JButton rectangleButton = new JButton("Дмитрий Поздеев");
 
 
     public MainWindow() {
@@ -20,6 +21,8 @@ public class MainWindow extends JFrame {
         jPanel.add(exampleButton);
         jPanel.add(circleButton);
         jPanel.setLayout(layout);
+        jPanel.add(rectangleButton);
+        jPanel.setLayout(layout);
         getContentPane().add(jPanel);
 
 
@@ -31,6 +34,11 @@ public class MainWindow extends JFrame {
         circleButton.addActionListener(e -> {
             CircleWindow circleWindow = new CircleWindow();
             circleWindow.setVisible(true);
+        });
+
+        rectangleButton.addActionListener(e -> {
+            RectangleWindow rectangleWindow = new RectangleWindow();
+            rectangleWindow.setVisible(true);
         });
     }
 }
