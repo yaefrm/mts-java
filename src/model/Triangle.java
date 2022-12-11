@@ -10,6 +10,8 @@ public class Triangle extends AbstractFigure {
     private final float perimeter;
     private final float area;
 
+    private final int number = x.length;
+
     private final Color color;
 
 
@@ -21,22 +23,26 @@ public class Triangle extends AbstractFigure {
 
     @Override
     public int[] getXCoordinates() {
-        return this.x;
+        return x;
     }
 
     @Override
     public int[] getYCoordinates() {
-        return this.y;
+        return y;
     }
 
     @Override
     public Color getColor() {
-        return this.color;
+        return color;
     }
 
     @Override
     public float getArea() {
         return area;
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override
@@ -55,9 +61,8 @@ public class Triangle extends AbstractFigure {
     }
 
     private float calculatePerimeter() {
-
         float perimeter = 0;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < x.length; i++) {
 
             int xDif = Math.abs(x[(i + 1) % 3] - x[i]);
             int yDif = Math.abs(y[(i + 1) % 3] - y[i]);

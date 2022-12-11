@@ -12,25 +12,24 @@ public class TriangleWindow extends JFrame {
 
     private final Triangle triangle = new Triangle();
 
-
     public TriangleWindow() throws HeadlessException {
         super("Triangle");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(width, height);
         setLocationRelativeTo(null);
     }
 
     @Override
     public void paint(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
+        super.paint(g);
+        Graphics2D g2 = (Graphics2D) g;
 
-        g2d.setColor(triangle.getColor());
-        Polygon polygon =
-                new Polygon(
-                        triangle.getXCoordinates(),
-                        triangle.getYCoordinates(),
-                        3);
+        g2.setColor(triangle.getColor());
+        Polygon polygon = new Polygon(
+                triangle.getXCoordinates(),
+                triangle.getYCoordinates(),
+                triangle.getNumber());
 
-        g2d.fillPolygon(polygon);
+        g2.fillPolygon(polygon);
+        g2.dispose();
     }
 }
