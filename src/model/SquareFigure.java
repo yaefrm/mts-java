@@ -25,13 +25,11 @@ public class SquareFigure extends AbstractFigure {
 
     @Override
     public float getArea() {
-
-        return ((X[3]-X[0])+(Y[1]-Y[0]))*2;
+        return (X[3]-X[0])^2;
     }
 
     @Override
     public float getPerimeter() {
-
-        return (X[3]-X[0])^2;
+        return ((X[3]-X[0])+(Y[1]-Y[0]))*2;
     }
 }
