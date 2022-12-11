@@ -32,4 +32,5 @@ public class SquareFigure extends AbstractFigure {
     public float getPerimeter() {
         return ((X[3]-X[0])+(Y[1]-Y[0]))*2;
     }
+
 }
