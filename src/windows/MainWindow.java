@@ -6,7 +6,9 @@ import java.awt.*;
 public class MainWindow extends JFrame {
 
     private final JButton exampleButton = new JButton("Example Button");
-    private final JButton squareButton = new JButton("Чередник Арина");
+    private final JButton circleButton = new JButton("Efremova Yana");
+    private final JButton rectangleButton = new JButton("Дмитрий Поздеев");
+
 
     public MainWindow() {
         super("Новое окно");
@@ -17,7 +19,9 @@ public class MainWindow extends JFrame {
         setLocationRelativeTo(null);
         GridLayout layout = new GridLayout(6, 1, 5, 12);
         jPanel.add(exampleButton);
-        jPanel.add(squareButton);
+        jPanel.add(circleButton);
+        jPanel.setLayout(layout);
+        jPanel.add(rectangleButton);
         jPanel.setLayout(layout);
         getContentPane().add(jPanel);
 
@@ -26,9 +30,15 @@ public class MainWindow extends JFrame {
             ExampleWindow exampleWindow = new ExampleWindow();
             exampleWindow.setVisible(true);
         });
-        squareButton.addActionListener(e -> {
-            SquareWindow squareWindow = new SquareWindow();
-            squareWindow.setVisible(true);
+
+        circleButton.addActionListener(e -> {
+            CircleWindow circleWindow = new CircleWindow();
+            circleWindow.setVisible(true);
+        });
+
+        rectangleButton.addActionListener(e -> {
+            RectangleWindow rectangleWindow = new RectangleWindow();
+            rectangleWindow.setVisible(true);
         });
     }
 }
