@@ -8,6 +8,7 @@ public class MainWindow extends JFrame {
     private final JButton exampleButton = new JButton("Example Button");
     private final JButton circleButton = new JButton("Efremova Yana");
     private final JButton rectangleButton = new JButton("Дмитрий Поздеев");
+    private final JButton squareButton = new JButton("Чередник Арина");
 
 
     public MainWindow() {
@@ -20,6 +21,7 @@ public class MainWindow extends JFrame {
         GridLayout layout = new GridLayout(6, 1, 5, 12);
         jPanel.add(exampleButton);
         jPanel.add(circleButton);
+        jPanel.add(squareButton);
         jPanel.setLayout(layout);
         jPanel.add(rectangleButton);
         jPanel.setLayout(layout);
@@ -39,6 +41,11 @@ public class MainWindow extends JFrame {
         rectangleButton.addActionListener(e -> {
             RectangleWindow rectangleWindow = new RectangleWindow();
             rectangleWindow.setVisible(true);
+        });
+
+        squareButton.addActionListener(e -> {
+            SquareWindow squareWindow = new SquareWindow();
+            squareWindow.setVisible(true);
         });
     }
 }
