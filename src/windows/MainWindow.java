@@ -1,9 +1,12 @@
 package windows;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class MainWindow extends JFrame {
+
+    private final int WIDTH_SIZE = 300;
+    private final int HEIGHT_SIZE = 350;
 
     private final JButton exampleButton = new JButton("Example Button");
     private final JButton circleButton = new JButton("Efremova Yana");
@@ -11,13 +14,18 @@ public class MainWindow extends JFrame {
     private final JButton squareButton = new JButton("Чередник Арина");
 
 
+    private final JButton buttonTriangleWindow = new JButton("Volkov Max");
+    private final Color buttonColor = new Color(135, 206, 250);
+
     public MainWindow() {
-        super("Новое окно");
+        super("Main");
+
         JPanel jPanel = new JPanel();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(250, 600);
+        setSize(WIDTH_SIZE, HEIGHT_SIZE);
         setResizable(false);
         setLocationRelativeTo(null);
+
         GridLayout layout = new GridLayout(6, 1, 5, 12);
         jPanel.add(exampleButton);
         jPanel.add(circleButton);
@@ -27,10 +35,15 @@ public class MainWindow extends JFrame {
         jPanel.setLayout(layout);
         getContentPane().add(jPanel);
 
+        buttonTriangleWindow.setFont(new Font("Times New Roman", Font.BOLD, 25));
+        buttonTriangleWindow.setBackground(buttonColor);
+        jPanel.add(buttonTriangleWindow);
 
-        exampleButton.addActionListener(e -> {
-            ExampleWindow exampleWindow = new ExampleWindow();
-            exampleWindow.setVisible(true);
+        getContentPane().add(jPanel);
+
+        buttonTriangleWindow.addActionListener(e -> {
+            TriangleWindow triangleWindow = new TriangleWindow();
+            triangleWindow.setVisible(true);
         });
 
         circleButton.addActionListener(e -> {
