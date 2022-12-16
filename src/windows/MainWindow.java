@@ -12,9 +12,8 @@ public class MainWindow extends JFrame {
     private final JButton circleButton = new JButton("Efremova Yana");
     private final JButton rectangleButton = new JButton("Дмитрий Поздеев");
     private final JButton squareButton = new JButton("Чередник Арина");
-
-
     private final JButton buttonTriangleWindow = new JButton("Volkov Max");
+
     private final Color buttonColor = new Color(135, 206, 250);
 
     public MainWindow() {
