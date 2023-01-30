@@ -15,7 +15,7 @@ public class DebtCalculatorController {
     private final DebtCalculator debtCalculator;
     @GetMapping("/debt/{id}")
     public double debtCalculator(@PathVariable Long id){
-        return debtCalculator.creditCheck(id);
+        return debtCalculator.creditCheck(id, "RUB");
     }
     @GetMapping("/listdebt")
     public List<User> usersWithCreditMoreThanDebit(){
