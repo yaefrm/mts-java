@@ -1,57 +1,55 @@
 package ru.evsmanko.mankoff.service;
 
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.mockito.Mock;
-import org.mockito.InjectMocks;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.mockito.Mockito.when;
-
-import ru.evsmanko.mankoff.entity.User;
-import ru.evsmanko.mankoff.repository.UserRepository;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-@ExtendWith(MockitoExtension.class)
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import ru.evsmanko.mankoff.entity.User;
+import org.junit.jupiter.api.Assertions;
+
+
+@SpringBootTest
 public class ExportUserDataServiceTest {
 
-    @Mock
-    private UserRepository userRepository;
-    @InjectMocks
-    private ExportUserDataService exportUserDataService;
+    @Value(value = "${app.filePath}")
+    private String filePath;
 
-    private static final long USER_ID = 1;
-    private static final String FILE_PATH = "src/main/java/jsons/user.json";
+    private final ExportUserDataService exportUserDataService;
+
+    @Autowired
+    public ExportUserDataServiceTest(ExportUserDataService exportUserDataService) {
+        this.exportUserDataService = exportUserDataService;
+    }
 
     @Test
     @DisplayName("Testing service of export user data to json")
-    public void exportingUserDataToJsonTest() throws IOException {
-        User user = new User(USER_ID, "Max", "Volkov", "79773617425");
-        when(userRepository.getUserById(USER_ID)).thenReturn(user);
-        exportUserDataService.exportUserDataById(USER_ID);
+    public void testExport() throws IOException {
+        long userId = 4;
+        User user = new User(userId, "Дмитрий", "Билан", "54235252356");
+        exportUserDataService.exportUserDataById(userId);
 
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
 
-        StringBuilder actualJson = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+        StringBuilder userJsonActual = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             while (reader.ready()) {
-                actualJson.append(reader.readLine()).append('\n');
+                userJsonActual.append(reader.readLine()).append('\n');
             }
         }
 
-        assertEquals(gson.toJson(user), actualJson.toString().trim());
+        Assertions.assertEquals(gson.toJson(user), userJsonActual.toString().trim());
     }
 
 }

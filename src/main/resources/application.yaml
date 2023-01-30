@@ -7,9 +7,12 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
+
 currency:
   USD: 1
   RUB: 73.5
   EUR: 1.1
+
 app:
   loan_coefficient: 2
+  filePath: src/test/resources/jsons/user.json

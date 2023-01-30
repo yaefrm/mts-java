@@ -1,4 +1,4 @@
-package ru.evsmanko.mankoff.model;
+package ru.evsmanko.mankoff.configuration;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
