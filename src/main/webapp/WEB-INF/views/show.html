@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>show</title>
+</head>
+<body>
+<strong>User information:</strong>
+<ul>
+    <li>
+        <p th:text="${'ID: ' + person.getId()}">VALUE</p>
+    </li>
+    <li>
+        <p th:text="${'First Name: ' + person.getFirstName()}">VALUE</p>
+    </li>
+    <li>
+        <p th:text="${'Last Name: ' + person.getLastName()}">VALUE</p>
+    </li>
+    <li>
+        <p th:text="${'Phone Number: ' + person.getPhone()}">VALUE</p>
+    </li>
+</ul>
+<a href="/mankoff/contacts"> Return </a>
+</body>
+</html>
