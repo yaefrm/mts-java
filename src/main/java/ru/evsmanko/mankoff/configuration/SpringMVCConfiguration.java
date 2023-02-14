@@ -56,4 +56,3 @@ public class SpringMVCConfiguration implements WebMvcConfigurer {
                 .addResourceLocations("/resources/");
     }
 }
-
