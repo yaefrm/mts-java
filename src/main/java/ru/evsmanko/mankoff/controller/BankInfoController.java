@@ -25,6 +25,11 @@ public class BankInfoController {
         return "contacts";
     }
 
+    @GetMapping("/info")
+    public String getInfo() {
+        return "info";
+    }
+
     @GetMapping("/contacts/{id}")
     public String showContactInformation(@PathVariable("id") int id, Model model) {
         model.addAttribute("person", userRepository.getUserById(id));
