@@ -20,6 +20,7 @@
         <gson.version>2.10</gson.version>
         <rest-assured.version>5.3.0</rest-assured.version>
         <thymeleaf.version>3.1.1.RELEASE</thymeleaf.version>
+        <modelmapper.version>3.0.0</modelmapper.version>
     </properties>
 
     <dependencies>
@@ -125,6 +126,12 @@
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring6</artifactId>
             <version>${thymeleaf.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>${modelmapper.version}</version>
         </dependency>
     </dependencies>
 
