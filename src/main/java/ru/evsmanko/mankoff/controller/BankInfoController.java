@@ -7,16 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.evsmanko.mankoff.repository.UserRepository;
+import ru.evsmanko.mankoff.service.BalanceService;
 
 @Controller
 @RequestMapping("/mankoff")
 public class BankInfoController {
 
     private final UserRepository userRepository;
+    private final BalanceService balanceService;
 
     @Autowired
-    public BankInfoController(UserRepository userRepository) {
+    public BankInfoController(UserRepository userRepository, BalanceService balanceService) {
         this.userRepository = userRepository;
+        this.balanceService = balanceService;
     }
 
     @GetMapping("/contacts")
@@ -25,9 +28,11 @@ public class BankInfoController {
         return "contacts";
     }
 
-    @GetMapping("/info")
-    public String getInfo() {
-        return "info";
+
+    @GetMapping("/information")
+    public String getInfo(Model model) {
+        model.addAttribute("balance", balanceService);
+        return "information";
     }
 
     @GetMapping("/contacts/{id}")
