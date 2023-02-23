@@ -2,8 +2,8 @@ package ru.evsmanko.mankoff.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.evsmanko.mankoff.converter.PaymentMapper;
 import ru.evsmanko.mankoff.dto.PaymentDto;
+import ru.evsmanko.mankoff.mapper.PaymentMapper;
 import ru.evsmanko.mankoff.repository.PaymentRepository;
 
 import java.sql.Timestamp;
@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PaymentService {
     private final PaymentRepository repository;
+
     private final PaymentMapper mapper;
 
     public List<PaymentDto> findPaymentsByBuyerId(long buyerId) {
