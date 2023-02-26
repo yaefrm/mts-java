@@ -3,13 +3,18 @@ package ru.evsmanko.mankoff.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.*;
+import ru.evsmanko.mankoff.dto.TransferDto;
 import ru.evsmanko.mankoff.entity.UserEntity;
 import ru.evsmanko.mankoff.repository.UserEntityRepository;
+import org.springframework.web.bind.annotation.PostMapping;
 import ru.evsmanko.mankoff.repository.UserRepository;
 import ru.evsmanko.mankoff.service.BalanceService;
+import ru.evsmanko.mankoff.service.TransferService;
 import ru.evsmanko.mankoff.utils.FormattingUtils;
 
 @Controller
@@ -25,12 +30,42 @@ public class AccountController {
     UserEntityRepository userEntityRepository;
 
     private final UserRepository userRepository;
-    
+    private final TransferService transferService;
+
+
     @GetMapping("/user")
     public String userInfo(Model model) {
         val users =  userRepository.findAll();
         model.addAttribute("users", users);
         return "userInf";
+    }
+
+    @GetMapping("/transfers")
+    public String transferInfo(Model model) {
+        val transferEntities = transferService.findAll();
+        model.addAttribute("transferEntities", transferEntities);
+        return "transfers";
+    }
+
+    @GetMapping("/transfers/{id}")
+    public String transferInfoBySenderId(@PathVariable Long id, Model model) {
+        val transferEntities = transferService.findAllByIdSender(id);
+        model.addAttribute("transferEntities", transferEntities);
+        return "transfersById";
+    }
+
+    @GetMapping("/transfer-create")
+    public String createTransferForm(Model model) {
+        model.addAttribute("transfer", new TransferDto());
+        return "transferCreate";
+    }
+
+    @PostMapping(
+            path = "/transfer-create",
+            consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public String transferAdd(TransferDto transfer, Model model) {
+        transferService.save(transfer);
+        return "redirect:/transfers";
     }
 
     @GetMapping("/user/{id}")
@@ -49,7 +84,7 @@ public class AccountController {
         model.addAttribute("userEntity", userEntityRepository.save(userEntity));
         return "user";
     }
-    
+
     @GetMapping("/balans")
     public String balances(Model model)
     {

@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Информация о переводе клиента</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <style>
+    #header {
+      height: 100px;
+      position: relative;
+      text-align: center;
+    }
+    #title {
+      width: 100%;
+      position: absolute;
+      top: 25%;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-light" style="background-color:#e77718;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Список платежей по Id</a>
+    <a class="navbar-brand" href="transfer-create">Создать новый платёж</a>
+    <a class="navbar-brand" href="user">Информация о клиентах</a>
+  </div>
+</nav>
+
+<div th:switch="${transferEntities}">
+  <h2 th:case="null">Нет информации</h2>
+  <div th:case="*">
+    <div id="header">
+      <h1 id="title">Информация о платежах</h1>
+    </div>
+    <table class="table" >
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Id получателя</th>
+        <th>Id отправителя</th>
+        <th>Сумма платежа</th>
+        <th>Время платежа</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="transfer: ${transferEntities}">
+        <td th:text="${transfer.getId()}" />
+        <td th:text="${transfer.getIdSender()}" />
+        <td th:text="${transfer.getIdReceiver()}" />
+        <td th:text="${transfer.getAmount()}" />
+        <td th:text="${transfer.getTimestamp()}" />
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+</body>
+</html>

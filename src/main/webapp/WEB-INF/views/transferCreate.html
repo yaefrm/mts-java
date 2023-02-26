@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Создание нового перевода</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <style>
+        input[type=number] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 5px;
+            box-sizing: border-box;
+        }
+        #location{
+            position: relative;
+            left: 30px;
+        }
+        #header {
+            height: 80px;
+            position: relative;
+            text-align: center;
+        }
+        #title {
+            width: 100%;
+            position: absolute;
+            top: 25%;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="header">
+    <h1 id="title">Ввод информации о переводе</h1>
+</div>
+
+<form action="#" th:action="@{/transfer-create}" th:object="${transfer}" method="post">
+<div id="location">
+        <label for="idSender" >Id отправителя</label>
+        <input type="number"  th:field="*{idSender}" id="idSender" placeholder="Id отправителя"/>
+        </br>
+
+        <label for="idSender" >Id Получателя</label>
+        <input type="number"  th:field="*{idReceiver}" id="idReceiver" placeholder="Id получателя"/>
+        </br>
+        <label for="idSender" >количество</label>
+        <input type="number" step="0.01" th:field="*{amount}" id="amount" placeholder="Сумма"/>
+        </br>
+        <input type="submit" class="btn btn-dark" value="Сохранить"/>
+
+</div>
+</form>
+</body>
+</html>
