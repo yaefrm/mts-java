@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Все платежи пользователя</title>
+  <link rel="stylesheet" th:href="@{/resources/css/payments.css}">
+</head>
+<body>
+
+<div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID покупателя</th>
+      <th>ID платежа</th>
+      <th>MCC код</th>
+      <th>Сумма</th>
+      <th>Время создания платежа</th>
+    </tr>
+    </thead>
+    <tbod>
+      <tr th:each="payment : ${userPayments}">
+        <td th:text="${payment.getBuyerId()}"></td>
+        <td th:text="${payment.getId()}"></td>
+        <td th:text="${payment.getMCCCode()}"></td>
+        <td th:text="${payment.getSum()}"></td>
+        <td th:text="${payment.getTimestamp()}"></td>
+      </tr>
+    </tbod>
+  </table>
+</div>
+</body>
+</html>

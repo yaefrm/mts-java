@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Создание нового платежа</title>
+  <link rel="stylesheet" th:href="@{/resources/css/new.css}">
+</head>
+<script>
+    function notification() {
+        var buyerId = document.getElementById("buyerId").value;
+        var MCCCode = document.getElementById("MCCCode").value;
+        var sum = document.getElementById("sum").value;
+
+        if (buyerId === '' || MCCCode === '' || sum === '') {
+            return;
+        }
+        alert('Платеж успешно добавлен!')
+    }
+</script>
+<body>
+
+<form id="form" th:method="POST" th:action="@{/payment/new}" th:object="${payment}">
+  <div class="box">
+
+    <div class="header-h1">
+      <h1>Создание нового платежа</h1>
+    </div>
+
+    <div class="text-field">
+      <label class="text-field__label" for="buyerId">ID покупателя</label>
+      <input class="text-field__input" type="text" th:field="*{buyerId}" id="buyerId" placeholder="ID покупателя"
+             required>
+    </div>
+
+    <div class="text-field">
+      <label class="text-field__label" for="MCCCode">MCC код</label>
+      <input class="text-field__input" type="text" th:field="*{MCCCode}" id="MCCCode" placeholder="MCC код" required>
+    </div>
+
+    <div class="text-field">
+      <label class="text-field__label" for="sum">Сумма</label>
+      <input class="text-field__input" type="text" th:field="*{sum}" id="sum" placeholder="Сумма" required>
+    </div>
+
+    <button id="btn" class="btn-1" onclick="notification()">Добавить!</button>
+  </div>
+</form>
+</body>
+</html>
