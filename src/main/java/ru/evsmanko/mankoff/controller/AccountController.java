@@ -19,6 +19,8 @@ import ru.evsmanko.mankoff.service.TransferService;
 import ru.evsmanko.mankoff.service.PaymentService;
 import ru.evsmanko.mankoff.utils.FormattingUtils;
 
+import java.util.Optional;
+
 @Controller
 @RequiredArgsConstructor
 public class AccountController {
@@ -76,19 +78,24 @@ public class AccountController {
 
     @GetMapping("/user/{id}")
     public String userById(@PathVariable long id, Model model) {
-        UserEntity userEntity = userEntityRepository.getUserEntityById(id);
+        Optional<UserEntity> userEntity = userEntityRepository.getUserEntityById(id);
 
-        if (userEntity == null)
-            return "user_not_found";
+        if (userEntity.isEmpty())
+            return "user/not_found";
 
-        model.addAttribute("userEntity", userEntity);
-        return "user";
+        model.addAttribute("userEntity", userEntity.get());
+        return "user/data";
     }
 
     @PostMapping("/user")
-    public String saveUserById(@RequestBody UserEntity userEntity, Model model) {
-        model.addAttribute("userEntity", userEntityRepository.save(userEntity));
-        return "user";
+    public String saveUserById(@RequestBody UserEntity user, Model model) {
+        Optional<UserEntity> userEntity = userEntityRepository.save(user);
+
+        if (userEntity.isEmpty())
+            return "user/save_error";
+
+        model.addAttribute("userEntity", userEntity.get());
+        return "user/data";
     }
 
     @GetMapping("/balans")
