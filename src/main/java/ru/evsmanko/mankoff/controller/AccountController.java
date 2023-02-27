@@ -2,16 +2,15 @@ package ru.evsmanko.mankoff.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.val;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.*;
+import ru.evsmanko.mankoff.dto.UserEntityDto;
+import ru.evsmanko.mankoff.service.UserService;
 import ru.evsmanko.mankoff.dto.TransferDto;
 import ru.evsmanko.mankoff.dto.PaymentDto;
-import ru.evsmanko.mankoff.entity.UserEntity;
-import ru.evsmanko.mankoff.repository.UserEntityRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.evsmanko.mankoff.repository.UserRepository;
 import ru.evsmanko.mankoff.service.BalanceService;
@@ -24,22 +23,12 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 public class AccountController {
-    @Autowired
-    BalanceService balanceService;
-
-    @Autowired
-    FormattingUtils formattingUtils;
-
-    @Autowired
-    UserEntityRepository userEntityRepository;
-
+    private final BalanceService balanceService;
+    private final FormattingUtils formattingUtils;
+    private final UserService userService;
     private final UserRepository userRepository;
     private final TransferService transferService;
-
-
-
     private final PaymentService paymentService;
-
 
     @GetMapping("/user")
     public String userInfo(Model model) {
@@ -78,23 +67,23 @@ public class AccountController {
 
     @GetMapping("/user/{id}")
     public String userById(@PathVariable long id, Model model) {
-        Optional<UserEntity> userEntity = userEntityRepository.getUserEntityById(id);
+        Optional<UserEntityDto> user = userService.getById(id);
 
-        if (userEntity.isEmpty())
+        if (user.isEmpty())
             return "user/not_found";
 
-        model.addAttribute("userEntity", userEntity.get());
+        model.addAttribute("user", user.get());
         return "user/data";
     }
 
     @PostMapping("/user")
-    public String saveUserById(@RequestBody UserEntity user, Model model) {
-        Optional<UserEntity> userEntity = userEntityRepository.save(user);
+    public String saveUserById(@RequestBody UserEntityDto userToSave, Model model) {
+        Optional<UserEntityDto> user = userService.save(userToSave);
 
-        if (userEntity.isEmpty())
+        if (user.isEmpty())
             return "user/save_error";
 
-        model.addAttribute("userEntity", userEntity.get());
+        model.addAttribute("user", user.get());
         return "user/data";
     }
 
