@@ -2,8 +2,8 @@ package ru.evsmanko.mankoff.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.evsmanko.mankoff.converter.TransferMapper;
 import ru.evsmanko.mankoff.dto.TransferDto;
+import ru.evsmanko.mankoff.mappers.TransferMapper;
 import ru.evsmanko.mankoff.repository.TransferRepository;
 import java.sql.Timestamp;
 import java.time.Instant;

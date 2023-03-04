@@ -14,7 +14,7 @@ import java.util.Optional;
 public class TransferRepository {
     private static final String QUERY_FINDALL = "SELECT * FROM transfers";
     private static final String QUERY_FINDAll_BY_IDSENDER = "SELECT * FROM transfers WHERE id_sender = ?";
-    private static final String QUERY_SAVE = "insert into TransferEntity(id, idSender, idReceiver, amount, timestamp) values (?,?,?)";
+    private static final String QUERY_SAVE = "INSERT INTO transfers (id, id_sender, id_receiver, amount, timestamp) VALUES (?, ?, ?, ?, ?)";
     private final JdbcTemplate jdbcTemplate;
 
     public TransferEntity mapRowToTransferEntity(ResultSet rs, int rowNum) throws SQLException {
@@ -44,7 +44,7 @@ public class TransferRepository {
                 transfer.getId(),
                 transfer.getIdSender(),
                 transfer.getIdReceiver(),
-                transfer.getTimestamp()
+                transfer.getTimestamp().toString()
         );
         return transfer;
     }
