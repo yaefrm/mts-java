@@ -18,13 +18,13 @@ public class FilmController {
     private final FilmService filmService;
 
     @PostMapping
-    public ResponseEntity<?> addFilm(@RequestBody Film film) {
+    public ResponseEntity<Film> addFilm(@RequestBody Film film) {
         Film resultFilm = filmService.saveFilm(film);
         return ResponseEntity.ok(resultFilm);
     }
 
     @GetMapping
-    public ResponseEntity<?> getFilm(@RequestParam("filmUuid") UUID filmUuid) {
+    public ResponseEntity<Film> getFilm(@RequestParam("filmUuid") UUID filmUuid) {
         Film film = filmService.getFilm(filmUuid);
         return ResponseEntity.ok(film);
     }
