@@ -1,5 +1,7 @@
 package com.example.catalogfilm.service.impl;
 
+import com.example.catalogfilm.converter.DirectorConverter;
+import com.example.catalogfilm.dto.DirectorDto;
 import com.example.catalogfilm.model.Director;
 import com.example.catalogfilm.repository.DirectorRepository;
 import com.example.catalogfilm.service.DirectorService;
@@ -15,6 +17,7 @@ import java.util.UUID;
 @Service
 public class DirectorServiceImpl implements DirectorService {
     private final DirectorRepository directorRepository;
+    private final DirectorConverter directorConverter;
     @SneakyThrows({ChangeSetPersister.NotFoundException.class})
     @Override
     public Director getDirector(UUID directorUuid) {
@@ -23,7 +26,8 @@ public class DirectorServiceImpl implements DirectorService {
     }
 
     @Override
-    public Director saveDirector(Director director) {
-          return directorRepository.save(director);
+    public DirectorDto saveDirector(DirectorDto director) {
+        Director newDirector = directorConverter.convertToEntity(director);
+        return directorConverter.convertToDto(directorRepository.save(newDirector));
     }
 }

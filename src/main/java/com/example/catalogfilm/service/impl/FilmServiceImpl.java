@@ -1,5 +1,7 @@
 package com.example.catalogfilm.service.impl;
 
+import com.example.catalogfilm.converter.FilmConverter;
+import com.example.catalogfilm.dto.FilmDto;
 import com.example.catalogfilm.model.Director;
 import com.example.catalogfilm.model.Film;
 import com.example.catalogfilm.repository.FilmRepository;
@@ -16,6 +18,7 @@ import java.util.UUID;
 
 public class FilmServiceImpl implements FilmService {
     private final FilmRepository filmRepository;
+    private final FilmConverter filmConverter;
     @SneakyThrows({ChangeSetPersister.NotFoundException.class})
     @Override
     public Film getFilm(UUID filmUuid) {
@@ -23,10 +26,9 @@ public class FilmServiceImpl implements FilmService {
         return filmOptional.orElseThrow(() -> new ChangeSetPersister.NotFoundException());
     }
 
-
-
     @Override
-    public Film saveFilm(Film film) {
-        return filmRepository.save(film);
+    public FilmDto saveFilm(FilmDto film) {
+        Film resFilm = filmConverter.convertToEntity(film);
+        return filmConverter.convertToDto(filmRepository.save(resFilm));
     }
 }
