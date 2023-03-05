@@ -1,5 +1,6 @@
 package com.example.catalogfilm.controller;
 
+import com.example.catalogfilm.dto.FilmDto;
 import com.example.catalogfilm.model.Director;
 import com.example.catalogfilm.model.Film;
 import com.example.catalogfilm.service.FilmService;
@@ -18,8 +19,8 @@ public class FilmController {
     private final FilmService filmService;
 
     @PostMapping
-    public ResponseEntity<Film> addFilm(@RequestBody Film film) {
-        Film resultFilm = filmService.saveFilm(film);
+    public ResponseEntity<FilmDto> addFilm(@RequestBody FilmDto film) {
+        FilmDto resultFilm = filmService.saveFilm(film);
         return ResponseEntity.ok(resultFilm);
     }
 
