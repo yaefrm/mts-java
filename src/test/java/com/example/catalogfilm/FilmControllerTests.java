@@ -2,6 +2,7 @@ package com.example.catalogfilm;
 
 import com.example.catalogfilm.constants.GenreEnum;
 import com.example.catalogfilm.controller.FilmController;
+import com.example.catalogfilm.converter.FilmConverter;
 import com.example.catalogfilm.model.Film;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class FilmControllerTests {
 	@Autowired
 	FilmController filmController;
+	@Autowired
+	FilmConverter filmConverter;
 	@Test
-	public void addFilm_addedFilm() {
+	void addFilmAddedFilm() {
 		Film film = new Film();
 		String title = "title";
 		film.setGenre(GenreEnum.HORROR);
 		film.setTitle(title);
 		film.setRating(3);
 
-		ResponseEntity createdFilm = filmController.addFilm(film);
+		ResponseEntity createdFilm = filmController.addFilm(filmConverter.convertToDto(film));
 
 		assertEquals(HttpStatus.OK, createdFilm.getStatusCode());
 	}

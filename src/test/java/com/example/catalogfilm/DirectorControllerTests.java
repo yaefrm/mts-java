@@ -3,6 +3,8 @@ package com.example.catalogfilm;
 import com.example.catalogfilm.constants.GenreEnum;
 import com.example.catalogfilm.controller.DirectorController;
 import com.example.catalogfilm.controller.FilmController;
+import com.example.catalogfilm.converter.DirectorConverter;
+import com.example.catalogfilm.converter.FilmConverter;
 import com.example.catalogfilm.model.Director;
 import com.example.catalogfilm.model.Film;
 import org.junit.jupiter.api.Test;
@@ -16,11 +18,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class DirectorControllerTests {
+class DirectorControllerTests {
     @Autowired
     DirectorController directorController;
+    @Autowired
+    DirectorConverter directorConverter;
+
     @Test
-    public void addDirector_addedDirector() {
+    void addDirectorAddedDirector() {
         Film film = new Film();
         String title = "title";
         film.setGenre(GenreEnum.HORROR);
@@ -33,7 +38,7 @@ public class DirectorControllerTests {
         director.setCountry("Moscow");
         director.setFilmList(List.of(film));
 
-        ResponseEntity createdDirector = directorController.addDirector(director);
+        ResponseEntity createdDirector = directorController.addDirector(directorConverter.convertToDto(director));
 
         assertEquals(HttpStatus.OK, createdDirector.getStatusCode());
     }}
