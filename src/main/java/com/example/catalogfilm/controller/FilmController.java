@@ -29,6 +29,6 @@ public class FilmController {
         Film film = filmService.getFilm(filmUuid);
         return ResponseEntity.ok(film);
     }
-    
+
 }
 
