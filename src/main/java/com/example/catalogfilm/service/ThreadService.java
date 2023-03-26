@@ -1,8 +1,8 @@
 package com.example.catalogfilm.service;
 
 
-public class Main{
-    public static void main(String[] args){
+public class ThreadService {
+    public static void start(){
         Thread th1 = new CustomThread();
         Thread th2 = new CustomThread();
         Thread th3 = new CustomThread();
