@@ -9,7 +9,7 @@ h1 {
   text-align: center;
 }
 
-p, li {
+p, li, th {
   font-size: 16px;
   line-height: 2;
   letter-spacing: 1px;
