@@ -1,11 +1,10 @@
 package com.example.catalogfilm.converter;
 
 import com.example.catalogfilm.dto.DirectorDto;
-import com.example.catalogfilm.dto.FilmDto;
 import com.example.catalogfilm.model.Director;
-import com.example.catalogfilm.model.Film;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+
 
 @Component
 public class DirectorConverter {
